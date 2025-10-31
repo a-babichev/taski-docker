@@ -1,0 +1,32 @@
+
+volumes:
+  pg_data_production:
+  static_volume:
+
+services:
+  db:
+    image: postgres:13.10
+    env_file: .env
+    volumes:
+      - pg_data_production:/var/lib/postgresql/data
+
+  backend:
+    env_file: .env
+    image: leobabich/taski_backend
+    volumes:
+      - static_volume:/backend_static
+
+  frontend:
+    env_file: .env
+    image: leobabich/taski_frontend
+    command: cp -r /app/build/. /frontend_static/
+    volumes:
+      - static_volume:/frontend_static
+
+  gateway:
+    env_file: .env
+    image: leobabich/taski_gateway
+    volumes:
+      - static_volume:/staticfiles/
+    ports:
+      - 8000:80
