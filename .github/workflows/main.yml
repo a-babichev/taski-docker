@@ -43,7 +43,7 @@ jobs:
     - name: Test with flake8 and django tests
       env:
         POSTGRES_USER: django_user
-        POSTGERS_PASSWORD: django_password
+        POSTGRES_PASSWORD: django_password
         POSTGRES_DB: django_db
         DB_HOST: 127.0.0.1
         DB_PORT: 5432
